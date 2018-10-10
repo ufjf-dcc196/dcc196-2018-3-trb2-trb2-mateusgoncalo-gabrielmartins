@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SerieDbHelper extends SQLiteOpenHelper{
-    
+
     public final static int DATABASE_VERSION = 1;
     public final static String DATABASE_NAME = "Serie.db";
 
