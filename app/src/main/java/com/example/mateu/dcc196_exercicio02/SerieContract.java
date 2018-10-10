@@ -8,12 +8,12 @@ public class SerieContract {
         public final static String COLUMN_NAME_NOME = "nome";
         public static final String COLUMN_NAME_TEMPORADA = "temporada";
         public static final String COLUMN_NAME_EPISODIO = "episodio";
-        public final static String CREATE_LIVRO  = "CREATE TABLE "+Serie.TABLE_NAME+" ("
+        public final static String CREATE_SERIE  = "CREATE TABLE "+Serie.TABLE_NAME+" ("
                 + Serie._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Serie.COLUMN_NAME_NOME+ " TEXT, "
                 + Serie.COLUMN_NAME_TEMPORADA+ " INTEGER,"
                 + Serie.COLUMN_NAME_EPISODIO+ " INTEGER"
                 +")";
-        public final static String DROP_LIVRO = "DROP TABLE IF EXISTS "+Serie.TABLE_NAME;
+        public final static String DROP_SERIE = "DROP TABLE IF EXISTS "+Serie.TABLE_NAME;
     }
 }
