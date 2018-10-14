@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -57,10 +58,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnRemover.setOnClickListener(new View.OnClickListener() {
+        adapter.setOnClickListener(new SerieAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onItemClick(View view, final int position) {
+                //Problema na exclusão
+                        SQLiteDatabase db = dbHelper.getReadableDatabase();
+                        String select = SerieContract.Serie._ID+" = ?";
+                        String [] selectArgs = {String.valueOf(position)};
+                        db.delete(SerieContract.Serie.TABLE_NAME, select, selectArgs);
+                        adapter.setCursor(getSeries());
+                        adapter.notifyItemRemoved(position);
             }
         });
     }
