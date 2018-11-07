@@ -61,13 +61,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnClickListener(new SerieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
-                //Problema na exclusão
-                        SQLiteDatabase db = dbHelper.getReadableDatabase();
-                        String select = SerieContract.Serie._ID+" = ?";
-                        String [] selectArgs = {String.valueOf(position)};
-                        db.delete(SerieContract.Serie.TABLE_NAME, select, selectArgs);
-                        adapter.setCursor(getSeries());
-                        adapter.notifyItemRemoved(position);
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+                String select = SerieContract.Serie.COLUMN_NAME_REGISTRO+" = ?";
+                String [] selectArgs = {String.valueOf(position)};
+                db.delete(SerieContract.Serie.TABLE_NAME, select, selectArgs);
+                adapter.notifyItemRemoved(position);
+                adapter.setCursor(getSeries());
             }
         });
     }
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String []visao = {
+                SerieContract.Serie.COLUMN_NAME_REGISTRO,
                 SerieContract.Serie.COLUMN_NAME_NOME,
                 SerieContract.Serie.COLUMN_NAME_TEMPORADA,
                 SerieContract.Serie.COLUMN_NAME_EPISODIO,

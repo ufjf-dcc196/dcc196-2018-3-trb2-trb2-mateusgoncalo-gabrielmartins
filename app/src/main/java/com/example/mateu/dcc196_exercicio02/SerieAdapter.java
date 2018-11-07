@@ -43,10 +43,12 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull SerieAdapter.ViewHolder viewHolder, int i) {
+        int idxNum = cursor.getColumnIndexOrThrow(SerieContract.Serie.COLUMN_NAME_REGISTRO);
         int idxNome = cursor.getColumnIndexOrThrow(SerieContract.Serie.COLUMN_NAME_NOME);
         int idxTemporada = cursor.getColumnIndexOrThrow(SerieContract.Serie.COLUMN_NAME_TEMPORADA);
         int idxNumero = cursor.getColumnIndexOrThrow(SerieContract.Serie.COLUMN_NAME_EPISODIO);
         cursor.moveToPosition(i);
+        viewHolder.txtNumBanco.setText(String.valueOf(cursor.getInt(idxNum)));
         viewHolder.txtNome.setText(cursor.getString(idxNome));
         viewHolder.txtTemporada.setText(String.valueOf(cursor.getInt(idxTemporada)));
         viewHolder.txtEpisodio.setText(String.valueOf(cursor.getInt(idxNumero)));
@@ -58,12 +60,14 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView txtNumBanco;
         public TextView txtNome;
         public TextView txtTemporada;
         public TextView txtEpisodio;
 
         public ViewHolder(final View itemView) {
             super(itemView);
+            txtNumBanco = itemView.findViewById(R.id.numeroSerie);
             txtNome = itemView.findViewById(R.id.nomeSerie);
             txtTemporada = itemView.findViewById(R.id.numeroTemporada);
             txtEpisodio = itemView.findViewById(R.id.numeroEpisodio);
@@ -75,7 +79,8 @@ public class SerieAdapter extends RecyclerView.Adapter<SerieAdapter.ViewHolder> 
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION)
                         {
-                            listener.onItemClick(itemView, position);
+  //                          listener.onItemClick(itemView, position);
+                            listener.onItemClick(itemView, Integer.parseInt(txtNumBanco.getText().toString()));
                         }
                     }
                 }
